@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYYY</title>
+    <script>
+      async function fetchData() {
+        try {
+          const response = await fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=n7F1g2jSF17lzYqzPa7W8mqpbyVRKEql');
+          const data = await response.json();
+
+          // Get the array of results from the JSON response
+          const results = data.results;
+
+          // Find the element where you want to display the titles
+          const titlesContainer = document.getElementById('titles');
+
+          // Loop through the results and create a list of titles
+          for (let i = 0; i < results.length; i++) {
+            const title = results[i].title;
+            const listItem = document.createElement('li');
+            listItem.textContent = title;
+            titlesContainer.appendChild(listItem);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+      // Call the async function to fetch data when the page loads
+      window.addEventListener('load', fetchData);
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to my page!</h1>
+    <p>This is a new HTML document.</p>
+
+    <!-- Create an element to display the titles -->
+    <ul id="titles"></ul>
+  </body>
+</html>
